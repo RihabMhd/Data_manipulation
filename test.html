@@ -10,6 +10,26 @@
 <body>
     <button id="hide">Hide</button>
     <button id="show">show</button>
+    <div>
+        <form id="employee-form">
+            <div id="form-fields">
+                <input type="text" name="firstName" id="firstName" placeholder="Prénom" required>
+                <input type="text" name="lastName"  id="lastName" placeholder="Nom" required>
+                <input type="number" name="age" placeholder="Âge" min="18" max="65" id="age">
+                <select name="department" id="department">
+                    <option value="">Choisir un département</option>
+                    <option value="Développement">Développement</option>
+                    <option value="Design">Design</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Management">Management</option>
+                </select>
+            </div>
+            <button type="button" id="add-skill-btn">+ Compétence</button>
+            <div id="skills-container"></div>
+            <button type="submit">Ajouter l'employé</button>
+        </form>
+    </div>
+
     <div id="employees-container">
         <table id="employees-table" border="1">
             <thead>
