@@ -26,5 +26,5 @@ function showTable(){
         parentDiv.style.display='block';
     })
 }
-hideTable()
 showTable()
+hideTable()
