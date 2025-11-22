@@ -192,3 +192,40 @@ function getEmployeesWithSkill(skill) {
     return employees.filter((emp)=>emp.skills.includes(skill))
 }
 console.log(getEmployeesWithSkill("Scrum"))
+
+const company = {
+    employees: employees, // le tableau existant
+    projects: {
+        "Project Alpha": [],
+        "Project Beta": [],
+        "Project Gamma": [],
+        "Project Delta": [],
+        "Project Epsilon": []
+    },
+    
+    // À implémenter :
+    assignEmployeeToProject: function(employeeId, projectName) {
+        // Assigner un employé à un projet
+        const emp=this.employees.find((emp)=>emp.id===employeeId)
+        if(this.projects[projectName]){
+            this.projects[projectName].push(emp)
+        }
+    },
+    
+    getProjectTeam: function(projectName) {
+        // Retourner tous les employés d'un projet
+        return this.projects[projectName]
+    },
+    
+    getEmployeeProjects: function(employeeId) {
+        // Retourner tous les projets d'un employé
+        const emp=this.employees.find((emp)=>emp.id===employeeId)
+        return emp.projects
+    },
+    
+    getEmployeesWithMultipleProjects: function() {
+        // Retourner les employés avec au moins 2 projets
+        const emp=this.employees.filter((emp)=>emp.projects.length>=2)
+        return emp
+    }
+};
