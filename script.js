@@ -151,7 +151,7 @@ function validation() {
 function getEmployeesByDepartment(department) {
     return employees.filter((emp) => emp.department === department)
 }
-console.log(getEmployeesByDepartment("Développement"));
+// console.log(getEmployeesByDepartment("Développement"));
 
 function augmenterSalaires(pourcentage) {
     employees.forEach(emp => {
@@ -176,7 +176,7 @@ function getDepartmentStats() {
             depTotal[depName] = { nombreEmployees: 0, AvgSalary: 0, MaxSalary: 0, total: 0 }
         }
         depTotal[depName].nombreEmployees += 1;
-        depTotal[depName].MaxSalary = Math.max(depTotal[depName].MaxSalary,employees[i].salary);
+        depTotal[depName].MaxSalary = Math.max(depTotal[depName].MaxSalary, employees[i].salary);
         depTotal[depName].total += employees[i].salary;
 
     }
@@ -185,13 +185,13 @@ function getDepartmentStats() {
     }
     return depTotal
 }
-console.log(getDepartmentStats());
+// console.log(getDepartmentStats());
 
 function getEmployeesWithSkill(skill) {
     // Retourne les employés ayant une compétence spécifique
-    return employees.filter((emp)=>emp.skills.includes(skill))
+    return employees.filter((emp) => emp.skills.includes(skill))
 }
-console.log(getEmployeesWithSkill("Scrum"))
+// console.log(getEmployeesWithSkill("Scrum"))
 
 const company = {
     employees: employees, // le tableau existant
@@ -202,30 +202,86 @@ const company = {
         "Project Delta": [],
         "Project Epsilon": []
     },
-    
+
     // À implémenter :
-    assignEmployeeToProject: function(employeeId, projectName) {
+    assignEmployeeToProject: function (employeeId, projectName) {
         // Assigner un employé à un projet
-        const emp=this.employees.find((emp)=>emp.id===employeeId)
-        if(this.projects[projectName]){
+        const emp = this.employees.find((emp) => emp.id === employeeId)
+        if (this.projects[projectName]) {
             this.projects[projectName].push(emp)
         }
     },
-    
-    getProjectTeam: function(projectName) {
+
+    getProjectTeam: function (projectName) {
         // Retourner tous les employés d'un projet
         return this.projects[projectName]
     },
-    
-    getEmployeeProjects: function(employeeId) {
+
+    getEmployeeProjects: function (employeeId) {
         // Retourner tous les projets d'un employé
-        const emp=this.employees.find((emp)=>emp.id===employeeId)
+        const emp = this.employees.find((emp) => emp.id === employeeId)
         return emp.projects
     },
-    
-    getEmployeesWithMultipleProjects: function() {
+
+    getEmployeesWithMultipleProjects: function () {
         // Retourner les employés avec au moins 2 projets
-        const emp=this.employees.filter((emp)=>emp.projects.length>=2)
+        const emp = this.employees.filter((emp) => emp.projects.length >= 2)
         return emp
     }
 };
+
+function masseSalarialeFor() {
+    let total = 0;
+    // Utiliser for classique
+    for (let i = 0; i < employees.length; i++) {
+        total += employees[i].salary;
+    }
+    return total;
+}
+// console.log(masseSalarialeFor())
+
+function listerEmailsForOf() {
+    const emails = [];
+    // Utiliser for...of
+    for (let x of employees) {
+        emails.push(x.email)
+    }
+    return emails;
+}
+// console.log(listerEmailsForOf())
+
+function compterParDepartementForEach() {
+    const stats = {};
+    // Utiliser forEach
+    employees.forEach((emp) => {
+        if (stats[emp.department]) {
+            stats[emp.department]++;
+        } else {
+            stats[emp.department] = 1;
+        }
+    })
+    return stats;
+}
+// console.log(compterParDepartementForEach())
+
+function employeesSimplifiesMap() {
+    // Retourner [{id, nomComplet, department}]
+    // Utiliser map
+    return employees.map((emp) => ({
+        id: emp.id,
+        nomComplet: emp.firstName + " " + emp.lastName,
+        department: emp.department
+    }))
+}
+// console.log(employeesSimplifiesMap())
+
+function employesSeniors() {
+    // Utiliser filter puis map
+    const seniorEmployees=employees.filter((emp)=>emp.age>35)
+    return seniorEmployees.map((emp)=>({
+        id: emp.id,
+        nomComplet: emp.firstName + " " + emp.lastName,
+        skills:emp.skills
+    }))
+}
+console.log(employesSeniors())
