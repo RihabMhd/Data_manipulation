@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,8 +19,11 @@
         <form id="employee-form">
             <div id="form-fields">
                 <input type="text" name="firstName" id="firstName" placeholder="Prénom" required>
-                <input type="text" name="lastName"  id="lastName" placeholder="Nom" required>
-                <input type="number" name="age" placeholder="Âge" min="18" max="65" id="age">
+                <span class="hidden" id="firstName-error"></span>
+                <input type="text" name="lastName" id="lastName" placeholder="Nom" required>
+                <span class="hidden" id="lastName-error"></span>
+                <input type="number" name="age" placeholder="Âge" id="age">
+                <span class="hidden" id="age-error"></span>
                 <select name="department" id="department">
                     <option value="">Choisir un département</option>
                     <option value="Développement">Développement</option>
