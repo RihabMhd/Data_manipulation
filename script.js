@@ -277,11 +277,71 @@ function employeesSimplifiesMap() {
 
 function employesSeniors() {
     // Utiliser filter puis map
-    const seniorEmployees=employees.filter((emp)=>emp.age>35)
-    return seniorEmployees.map((emp)=>({
+    const seniorEmployees = employees.filter((emp) => emp.age > 35)
+    return seniorEmployees.map((emp) => ({
         id: emp.id,
         nomComplet: emp.firstName + " " + emp.lastName,
-        skills:emp.skills
+        skills: emp.skills
     }))
 }
-console.log(employesSeniors())
+// console.log(employesSeniors())
+
+function rechercherEmployes(criteres) {
+    // criteres: { department, minAge, maxAge, skills, minSalary, maxSalary }
+    // Retourne les employés correspondant à tous les critères
+
+    return employees.filter(emp => {
+        if (emp.department !== criteres.department) return false;
+
+        if (emp.age < criteres.minAge) return false;
+        if (emp.age > criteres.maxAge) return false;
+
+        if (emp.salary < criteres.minSalary) return false;
+        if (emp.salary > criteres.maxSalary) return false;
+
+        if (criteres.skills.length > 0) {
+            const hasSkills = criteres.skills.every(skill => emp.skills.includes(skill));
+            if (!hasSkills) return false;
+        }
+
+        return true;
+    });
+}
+
+function genererNouvelId() {
+    // Générer un ID unique non existant dans le tableau
+    const ids = new Set(employees.map((emp) => emp.id))
+    const maxId = Math.max(...ids)
+    return maxId + 1;
+}
+function calculerAnciennete(joinDate) {
+    // Retourne l'ancienneté en années
+    // Format d'entrée : "YYYY-MM-DD"
+    const dateEntree = new Date(joinDate);
+    const today = new Date();
+
+    let anciennete = today.getFullYear() - dateEntree.getFullYear();
+    return anciennete
+}
+// console.log(calculerAnciennete("2019-05-15"))
+
+// function competencesPlusCourantes() {
+//     // Retourne les 5 compétences les plus courantes
+//     // avec le nombre d'employés qui les possèdent
+
+
+//    const compteur = {};
+
+//     employees.forEach(emp => {
+//         emp.skills.forEach(skill => {
+//             if (compteur[skill]) {
+//                 compteur[skill]++;
+//             } else {
+//                 compteur[skill] = 1;
+//             }
+//         });
+//     });
+//     return compteur
+
+// }
+// console.log(competencesPlusCourantes())
